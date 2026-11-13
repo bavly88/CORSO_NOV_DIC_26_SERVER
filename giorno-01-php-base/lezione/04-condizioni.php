@@ -24,6 +24,12 @@ if ($tesseraValida && $copie > 0) {
 } else {
     echo "Prestito non possibile.\n";
 }
+$eta = 60;
+if($tesseraValida || $eta>=65){
+    echo("prestito 2 possibile. \n");
+} else {
+    echo("prestito 2 non possibilie. \n");
+}
 
 // ternario
 $stato = $copie > 0 ? "disponibile" : "in prestito";
