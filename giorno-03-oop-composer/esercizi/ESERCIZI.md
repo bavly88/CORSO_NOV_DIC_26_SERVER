@@ -174,6 +174,13 @@ Obiettivo: le classi stanno ognuna nel suo file e Composer le carica da solo, se
 
    Il nome del file deve essere uguale al nome della classe, maiuscole comprese.
 
+   Attenzione alle eccezioni. In Libro.php si usano InvalidArgumentException e RuntimeException. Sono classi di PHP e non hanno namespace. In un file con namespace App\Modelli;, però, PHP aggiunge quel prefisso a ogni nome di classe scritto senza namespace. Quindi cerca App\Modelli\InvalidArgumentException, che non esiste, e dà questo errore:
+
+Class "App\Modelli\InvalidArgumentException" not found
+
+Per risolvere scrivi la \ davanti al nome: throw new \InvalidArgumentException("...");
+
+
 3. Dal terminale, dentro la cartella `biblioteca-composer`, esegui:
 
    ```bash
