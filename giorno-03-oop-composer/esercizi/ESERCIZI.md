@@ -1,167 +1,205 @@
-# Giorno 5 – Esercizi del pomeriggio (SQL)
+# Giorno 3 – Esercizi del pomeriggio (OOP e Composer)
 
 ## Prima di iniziare
 
-1. **Controlla il database `biblioteca`.**
-   Se non esiste, o se l'hai modificato nei giorni scorsi, ricrealo.
-   Esegui questi due file della cartella `lezione`, in quest'ordine:
-   - `00-schema-biblioteca.sql` (crea le tabelle)
-   - `00-dati-biblioteca.sql` (inserisce i dati)
+1. Crea una cartella `php-giorno-03`. Tutti gli esercizi vanno lì dentro.
+2. Gli esercizi da 3.1 a 3.4 sono script da eseguire nel terminale. Ogni esercizio ha un suo file:
 
-2. **Crea un file `esercizi.sql`.**
-   Scrivi lì tutte le query. Prima di ogni query metti un commento con il numero dell'esercizio:
-
-   ```sql
-   -- 5.1
-   SELECT ...;
-
-   -- 5.2
-   SELECT ...;
+   ```bash
+   php es-3-1.php
    ```
 
-3. **Controlla ogni risultato prima di guardare la soluzione.**
-   Chiediti: il risultato ha senso? Quante righe mi aspettavo?
-   Se non lo sai, guarda prima i dati della tabella con `SELECT * FROM ...`.
-
-In ogni esercizio la riga **Ti serve** indica le parole chiave SQL da usare.
+3. L'esercizio 3.5 è un piccolo progetto Composer, in una sottocartella a parte.
 
 ---
 
-## Livello 1 – Interrogare una sola tabella (40 minuti)
+## 3.1 – La classe Autore (30 minuti)
 
-**5.1** Mostra tutti i libri, ordinati per anno di pubblicazione: prima il più recente, ultimo il più vecchio.
-*Ti serve:* `ORDER BY ... DESC`
+**File:** `es-3-1.php`
 
-**5.2** Mostra i libri pubblicati dal 1960 al 1975. Devono comparire anche quelli del 1960 e quelli del 1975.
-*Ti serve:* `BETWEEN` oppure `>=` e `<=`
+1. Crea la classe `Autore`. Il costruttore riceve tre valori:
+   - `nome` (stringa)
+   - `cognome` (stringa)
+   - `annoNascita` (intero)
 
-**5.3** Mostra i libri che hanno le lettere "il" nel titolo.
-Attenzione: la query troverà anche titoli in cui "il" sta dentro un'altra parola (per esempio "Sicilia"). Va bene così: guarda il risultato e controlla quali titoli sono usciti.
-*Ti serve:* `LIKE` con il simbolo `%`
+   Usa la *constructor promotion*: dichiari le proprietà direttamente nei parametri del costruttore.
 
-**5.4** Mostra i 3 libri con più pagine.
-*Ti serve:* `ORDER BY ... DESC` e `LIMIT`
-
-**5.5** Mostra i libri senza numero di pagine (il campo è vuoto).
-*Ti serve:* `IS NULL` (non funziona `= NULL`)
-
-**5.6** Mostra l'elenco delle nazionalità degli autori. Ogni nazionalità deve comparire una volta sola.
-*Ti serve:* `DISTINCT`
-
----
-
-## Livello 2 – Contare e calcolare (30 minuti)
-
-**5.7** Quanti libri ci sono in tutto? Il risultato è un solo numero.
-*Ti serve:* `COUNT(*)`
-
-**5.8** Calcola, sul numero di pagine dei libri:
-- la media
-- il valore più piccolo
-- il valore più grande
-
-Il risultato è una sola riga con tre colonne.
-*Ti serve:* `AVG`, `MIN`, `MAX`
-
-**5.9** Quanti libri ci sono per ogni genere?
-Il risultato ha una riga per genere: id del genere e numero di libri. Il nome del genere non serve (lo aggiungi nella 5.13).
-*Ti serve:* `COUNT` e `GROUP BY`
-
-**5.10** In quali anni sono stati pubblicati 2 o più libri?
-Mostra l'anno e quanti libri sono usciti in quell'anno.
-*Ti serve:* `GROUP BY` e `HAVING` (non `WHERE`: la condizione è sul conteggio)
-
----
-
-## Livello 3 – Unire più tabelle con JOIN (70 minuti)
-
-**5.11** Mostra il titolo di ogni libro e accanto il nome del suo editore.
-Nota: i libri senza editore qui **non** compaiono.
-*Ti serve:* `INNER JOIN`
-
-**5.12** Come la 5.11, ma devono comparire **anche** i libri senza editore. Al posto del nome dell'editore vedrai `NULL`.
-Confronta il numero di righe con quello della 5.11.
-*Ti serve:* `LEFT JOIN`
-
-**5.13** Per ogni genere mostra il nome del genere e quanti libri ha.
-Devono comparire anche i generi che non hanno libri, con il numero 0.
-*Ti serve:* `LEFT JOIN`, `COUNT` e `GROUP BY`
-Attenzione: `COUNT(*)` conta 1 anche per i generi senza libri. Conta invece una colonna della tabella dei libri.
-
-**5.14** Mostra il titolo di ogni libro e il nome del suo autore.
-Prima guarda lo schema: come sono collegati libri e autori? Ti servono due tabelle o tre?
-*Ti serve:* `JOIN`
-
-**5.15** Quali autori non hanno nessun libro nel catalogo?
-*Ti serve:* `LEFT JOIN` e `IS NULL`
-
-**5.16** Quali soci non hanno mai preso un libro in prestito?
-È lo stesso ragionamento della 5.15, con altre tabelle.
-*Ti serve:* `LEFT JOIN` e `IS NULL`
-
-**5.17** Mostra i prestiti non ancora restituiti (la data di restituzione è vuota).
-Per ogni prestito mostra:
-- il nome del socio
-- il titolo del libro
-- la data del prestito
-- quanti giorni sono passati dal prestito a oggi
-
-*Ti serve:* `JOIN`, `IS NULL`, `DATEDIFF(CURDATE(), ...)`
-
----
-
-## Livello 4 – JOIN e conteggi insieme (40 minuti)
-
-**5.18** Mostra i 5 libri prestati più volte: titolo e numero di prestiti, dal più prestato al meno prestato.
-*Ti serve:* `JOIN`, `COUNT`, `GROUP BY`, `ORDER BY ... DESC`, `LIMIT`
-
-**5.19** Considera solo i prestiti già restituiti. Per ogni socio mostra:
-- il nome del socio
-- quanti prestiti ha restituito
-- quanti giorni sono durati in media i suoi prestiti (dal giorno del prestito al giorno della restituzione)
-
-Bastano i soci con almeno un prestito restituito.
-*Ti serve:* `JOIN`, `IS NOT NULL`, `COUNT`, `AVG(DATEDIFF(...))`, `GROUP BY`
-
----
-
-## Livello 5 – Modificare i dati e scoprire i vincoli (30 minuti)
-
-**5.20** Il libro "Il nome della rosa" ha un prestito non ancora restituito. Registra la restituzione con la data di oggi.
-Prima scrivi una `SELECT` che trovi **solo** quel prestito. Quando restituisce una riga sola, trasformala in `UPDATE` con lo stesso `WHERE`.
-Attenzione: un `UPDATE` senza `WHERE` modifica tutte le righe della tabella.
-*Ti serve:* `UPDATE ... SET ... WHERE`, `CURDATE()`
-
-**5.21** Prova a cancellare il genere "Giallo".
-- Cosa succede?
-- Leggi il messaggio di errore: quale tabella lo impedisce, e perché?
-
-*Ti serve:* `DELETE FROM ... WHERE`
-
-**5.22** Cancella l'editore Sellerio. Poi cancella l'editore Adelphi.
-- Sono riuscite le cancellazioni?
-- Guarda i libri che erano di Adelphi: cosa è cambiato?
-- Perché qui il database si comporta in modo diverso dalla 5.21?
-  Suggerimento: guarda nello schema come sono definite le chiavi esterne (`FOREIGN KEY ... ON DELETE ...`).
-
----
-
-## Extra – Creare una vista
-
-Una vista è una query salvata con un nome. Dopo averla creata si interroga come una tabella.
-
-1. Crea una vista chiamata `v_prestiti_aperti` che mostri, per i prestiti non ancora restituiti: nome del socio, titolo del libro, data del prestito.
-   Puoi partire dalla query della 5.17.
-
-   ```sql
-   CREATE VIEW v_prestiti_aperti AS
-   SELECT ...;
+   ```php
+   public function __construct(
+       public string $nome,
+       ...
+   ) {}
    ```
 
-2. Interrogala:
+2. Aggiungi il metodo `nomeCompleto(): string`.
+   Restituisce nome e cognome separati da uno spazio, per esempio `"Italo Calvino"`.
 
-   ```sql
-   SELECT * FROM v_prestiti_aperti;
+3. Aggiungi il metodo `etaOggi(): int`.
+   Restituisce l'anno di oggi meno l'anno di nascita. Calcolalo anche se l'autore non è più vivo.
+   *Ti serve:* `date('Y')` restituisce l'anno corrente.
+
+4. Crea tre autori, mettili in un array e, con un `foreach`, stampa una riga per ognuno:
+
+   ```
+   Italo Calvino, nato nel 1923
    ```
 
-3. Dopo la 5.20 il prestito di "Il nome della rosa" compare ancora nella vista? Perché?
+---
+
+## 3.2 – Un Libro che si difende (40 minuti)
+
+**File:** `es-3-2.php`
+
+Un oggetto "si difende" quando non permette di essere creato o usato con dati sbagliati.
+
+1. Crea la classe `Libro` con queste proprietà:
+   - `titolo` (stringa)
+   - `autore` (stringa: qui è solo un nome, non un oggetto `Autore`)
+   - `pagine` (intero)
+   - `copie` (intero, valore predefinito 1). Questa proprietà è **private**: dall'esterno non si può modificare direttamente.
+
+2. Nel costruttore controlla i dati. Lancia una `InvalidArgumentException` se:
+   - il titolo è una stringa vuota, oppure
+   - le pagine sono 0 o meno.
+
+   ```php
+   throw new InvalidArgumentException("Il titolo non può essere vuoto");
+   ```
+
+3. Aggiungi questi metodi:
+
+   | Metodo | Cosa fa |
+   |---|---|
+   | `presta(): void` | toglie una copia. Se le copie sono già 0, lancia `RuntimeException("Nessuna copia disponibile")` |
+   | `restituisci(): void` | aggiunge una copia |
+   | `disponibile(): bool` | restituisce `true` se c'è almeno una copia |
+   | `copie(): int` | restituisce il numero di copie |
+
+4. Prova la classe con `try / catch`. Fai due prove:
+   - crea un libro con 0 pagine;
+   - crea un libro con una copia e chiama `presta()` due volte.
+
+   Nel `catch` stampa il messaggio dell'eccezione (`$e->getMessage()`).
+   **Lo script deve arrivare fino in fondo**: dopo le due prove stampa una riga finale, per esempio `Fine dello script`. Se non la vedi, un'eccezione non è stata catturata.
+
+---
+
+## 3.3 – La biblioteca (60 minuti)
+
+**File:** `es-3-3.php`
+
+Copia in cima al file la classe `Libro` del 3.2. Sotto scrivi la nuova classe.
+
+1. Crea la classe `Biblioteca` con una proprietà privata `$libri`, che all'inizio è un array vuoto.
+
+2. Aggiungi questi metodi:
+
+   | Metodo | Cosa fa |
+   |---|---|
+   | `aggiungi(Libro $libro): void` | aggiunge il libro all'array |
+   | `numeroLibri(): int` | restituisce quanti libri ci sono |
+   | `cercaPerAutore(string $autore): array` | restituisce un array con gli oggetti `Libro` di quell'autore |
+   | `totalePagine(): int` | restituisce la somma delle pagine di tutti i libri |
+   | `disponibili(): array` | restituisce un array con i soli libri che hanno almeno una copia |
+
+   *Ti serve:* `count()`, `foreach`. Se le conosci, anche `array_filter()` e `array_sum()`.
+
+3. Prova la classe:
+   - crea una biblioteca;
+   - aggiungi almeno 5 libri, con almeno due libri dello stesso autore;
+   - presta uno o più libri finché almeno uno resta senza copie;
+   - chiama ogni metodo e stampa il risultato.
+
+   `cercaPerAutore()` e `disponibili()` restituiscono oggetti: per stamparli usa un `foreach` e scrivi il titolo di ogni libro.
+
+---
+
+## 3.4 – Ebook e audiolibri (30 minuti)
+
+**File:** `es-3-4.php`
+
+1. Apri il file della lezione `02-ereditarieta.php` e copia nel tuo file la classe `Libro` e la classe `Ebook`.
+   Non usare il `Libro` del 3.2: è una classe diversa.
+
+2. Crea la classe `Audiolibro`, che estende `Libro`:
+   - aggiungi la proprietà `durataMinuti` (intero);
+   - riscrivi il metodo `descrizione()`: restituisce la descrizione di `Libro` più la durata in ore e minuti.
+
+   Esempio con `durataMinuti = 500`:
+
+   ```
+   ... (audiolibro, 8 ore e 20 minuti)
+   ```
+
+   *Ti serve:* `parent::descrizione()`, `intdiv()` per le ore, `%` per i minuti.
+
+3. Crea un libro, un ebook e un audiolibro e mettili nello stesso array.
+   Stampa la descrizione di ognuno con **un solo** `foreach`, senza `if` per distinguere il tipo.
+   Ogni oggetto usa automaticamente la sua versione di `descrizione()`.
+
+---
+
+## 3.5 – Con Composer (40 minuti)
+
+**Cartella:** `php-giorno-03/biblioteca-composer`
+
+Obiettivo: le classi stanno ognuna nel suo file e Composer le carica da solo, senza `require` scritti a mano.
+
+1. Crea la cartella `biblioteca-composer` e dentro un file `composer.json`:
+
+   ```json
+   {
+       "autoload": {
+           "psr-4": {
+               "App\\": "src/"
+           }
+       }
+   }
+   ```
+
+   Vuol dire: le classi del namespace `App` stanno nella cartella `src`.
+
+2. Crea questi due file e spostaci le classi del 3.3:
+
+   | Classe | File |
+   |---|---|
+   | `Libro` | `src/Modelli/Libro.php` |
+   | `Biblioteca` | `src/Modelli/Biblioteca.php` |
+
+   La prima riga dopo `<?php` di entrambi i file è:
+
+   ```php
+   namespace App\Modelli;
+   ```
+
+   Il nome del file deve essere uguale al nome della classe, maiuscole comprese.
+
+3. Dal terminale, dentro la cartella `biblioteca-composer`, esegui:
+
+   ```bash
+   composer dump-autoload
+   ```
+
+   Si crea la cartella `vendor` con il file `autoload.php`.
+
+4. Crea `esegui.php` nella cartella `biblioteca-composer`:
+
+   ```php
+   <?php
+   require __DIR__ . '/vendor/autoload.php';
+
+   use App\Modelli\Libro;
+   use App\Modelli\Biblioteca;
+
+   // qui ripeti le prove del 3.3
+   ```
+
+   Eseguilo con `php esegui.php`.
+
+5. Esperimento: rinomina `Libro.php` in `libro.php` (tutto minuscolo) e riesegui `esegui.php`.
+   - Funziona ancora?
+   - Scrivi in un commento in `esegui.php` cosa è successo.
+
+   Nota: Windows non distingue maiuscole e minuscole nei nomi dei file, un server Linux sì. Pensa a cosa succederebbe pubblicando il progetto su un server Linux.
+
+   Alla fine rimetti il nome `Libro.php`.

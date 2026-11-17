@@ -52,13 +52,16 @@ class Libro
 
 // new crea l'oggetto; -> accede a proprietà e metodi (in JavaScript era il punto)
 $libro = new Libro("Il barone rampante", "Italo Calvino", 1957, 2);
+$libro->titolo = "nuovo titolo"; #posso modificarla perchè è stata dichiarata public
 echo $libro->titolo . "\n";
 echo $libro->descrizione() . "\n";
 echo "Ha {$libro->eta()} anni\n";
 
+var_dump($libro->disponibile()); //parte con 2 copie
 $libro->presta();
+var_dump($libro->disponibile()); //rimane una copia
 $libro->presta();
-var_dump($libro->disponibile());   // false
+var_dump($libro->disponibile());   // false non ci sono più copie
 
 // echo $libro->copie;   // Errore: Cannot access private property
 

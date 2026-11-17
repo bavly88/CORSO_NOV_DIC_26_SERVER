@@ -24,11 +24,13 @@ class Libro
 try {
     $buono = new Libro("Marcovaldo", 160);
     echo "Creato: {$buono->titolo}\n";
-
     $sbagliato = new Libro("Libro vuoto", 0);   // qui parte l'eccezione...
     echo "Questa riga non viene eseguita\n";      // ...e si salta al catch
 } catch (InvalidArgumentException $e) {
     echo "Errore: " . $e->getMessage() . "\n";
+}
+finally{
+    echo "questo viene sempre eseguito\n";//si usa per chiudere connessioni aperte o resettare qualcosa che altrimenti rimarrebbe in uno stato non adatto
 }
 
 echo "Lo script continua\n";

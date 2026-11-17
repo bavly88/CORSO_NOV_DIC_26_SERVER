@@ -35,18 +35,20 @@ class Ebook extends Libro
     }
 
     // OVERRIDE: stesso nome del metodo della madre, comportamento diverso
-    public function descrizione(): string
+     public function descrizione(): string
     {
         return parent::descrizione() . " (ebook, {$this->formato})";
-    }
+     }
 }
 
 $cartaceo = new Libro("Lessico famigliare", "Natalia Ginzburg", 230);
 $ebook = new Ebook("Il nome della rosa", "Umberto Eco", 503, "EPUB");
 
 // Lo stesso metodo, chiamato su oggetti diversi, fa cose diverse (polimorfismo)
-foreach ([$cartaceo, $ebook] as $l) {
+$libri=[$cartaceo, $ebook];
+foreach ($libri as $l) {
     echo $l->descrizione() . "\n";
 }
 
 var_dump($ebook instanceof Libro);   // true: un Ebook è anche un Libro
+var_dump($cartaceo instanceof Ebook); //false: un Libro non è un Ebook

@@ -41,7 +41,7 @@ class Dvd implements Prestabile
     {
     }
 
-    public function presta(string $utente): void
+    public function presta(string $utente): void //utente non è utilizzato ma deve per forza comparire come parametro per coerenza con l'interfaccia
     {
         $this->fuori = true;
     }
