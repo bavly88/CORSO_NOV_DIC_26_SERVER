@@ -80,7 +80,6 @@ main {
   background-color: var(--card-bg);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  flex: 1;
 }
 
 h1 {
@@ -191,7 +190,7 @@ button, .btn {
   transition: background-color 0.2s;
 }
 
-button:hover {
+button:hover, .btn:hover {
   background-color: var(--primary-hover);
 }
 
@@ -259,13 +258,13 @@ tr.esaurito a {
   color: #64748b;
 }
 
-/* Griglia elegante per la pagina Autori */
+/* Griglia elegante per la pagina Autori e Libri dell'autore */
 .authors-grid {
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 16px;
 }
 
@@ -273,6 +272,8 @@ tr.esaurito a {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 14px;
+  height: 100%;
   padding: 18px 20px;
   background-color: #f8fafc;
   border: 1px solid var(--border-color);
@@ -292,6 +293,7 @@ tr.esaurito a {
   font-weight: 600;
   font-size: 1.05rem;
   color: var(--primary);
+  line-height: 1.3;
 }
 
 .author-card:hover .author-name {
@@ -305,6 +307,69 @@ tr.esaurito a {
   background-color: #e2e8f0;
   padding: 4px 12px;
   border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Scheda dettaglio libro (libro.php) */
+.status-badge {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 30px;
+  white-space: nowrap;
+}
+
+.status-badge.available {
+  background-color: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.status-badge.unavailable {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.book-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.detail-box {
+  background-color: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.detail-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+.detail-value {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.detail-value.link {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.detail-value.link:hover {
+  text-decoration: underline;
 }
 
 /* Footer a barra informativa */
