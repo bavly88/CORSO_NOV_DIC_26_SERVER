@@ -11,7 +11,7 @@ SELECT titolo, anno FROM libri;
 
 -- WHERE: solo le righe che rispettano la condizione
 SELECT titolo, anno FROM libri WHERE anno < 1970;
-SELECT * FROM libri WHERE genere_id = 3;
+SELECT * FROM libri WHERE genere_id = 6;
 
 -- ORDER BY: ordinare (ASC crescente, il default; DESC decrescente)
 SELECT titolo, anno FROM libri ORDER BY anno DESC;

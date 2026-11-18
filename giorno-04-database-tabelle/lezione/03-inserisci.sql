@@ -18,18 +18,14 @@ INSERT INTO autori (nome, cognome) VALUES
 ('Franco', 'Lucentini');
 
 -- genere_id: l'id di un genere che esiste (Romanzo = 1, Giallo = 3)
-INSERT INTO libri (titolo, anno, pagine, genere_id) VALUES
-('Il barone rampante', 1957, 270, 1),
-('Il nome della rosa', 1980, 503, 3),
-('La donna della domenica', 1972, 450, 3),
-('L''isola di Arturo', 1957, NULL, 1);
+libri
 
 -- Collegare libri e autori: una riga per ogni coppia
 INSERT INTO libri_autori (libro_id, autore_id) VALUES
-(1, 1),   -- Il barone rampante - Calvino
-(2, 2),   -- Il nome della rosa - Eco
-(3, 3),   -- La donna della domenica - Fruttero
-(3, 4);   -- La donna della domenica - Lucentini
+(19, 5),   -- Il barone rampante - Calvino
+(20, 6),   -- Il nome della rosa - Eco
+(21, 7),   -- La donna della domenica - Fruttero
+(21, 8);   -- La donna della domenica - Lucentini
 
 -- PROVE DI ERRORE (togliere il commento una alla volta ed eseguire con Ctrl+F9):
 -- INSERT INTO generi (nome) VALUES ('Giallo');              -- doppione: UNIQUE lo rifiuta
