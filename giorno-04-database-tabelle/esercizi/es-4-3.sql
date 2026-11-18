@@ -1,9 +1,4 @@
--- 1. Elimina prima le tabelle che contengono chiavi esterne
-DROP TABLE IF EXISTS prestiti;
-DROP TABLE IF EXISTS soci;
-DROP TABLE IF EXISTS libri; -- Se esiste già nel database
 
--- 2. Ricrea le tabelle nell'ordine corretto
 CREATE TABLE soci (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
@@ -22,22 +17,18 @@ CREATE TABLE prestiti (
     FOREIGN KEY (socio_id) REFERENCES soci(id)
 );
 
--- Inserimento di 3 soci (il primo sfrutta il DEFAULT per inserire la data di oggi in automatico)
 INSERT INTO soci (nome, cognome, email) VALUES 
     ('Anna', 'Rossi', 'anna.rossi@example.com'),
     ('Marco', 'Bianchi', 'marco.bianchi@example.com');
 
--- Terzo socio con data di iscrizione personalizzata
 INSERT INTO soci (nome, cognome, email, data_iscrizione) VALUES 
     ('Giulia', 'Verdi', 'giulia.verdi@example.com', '2026-01-15');
 
--- Inserimento di 4 prestiti (presupponendo che nella tabella 'libri' esistano almeno gli id 1, 2 e 3)
--- Nota: data_restituzione è impostata a NULL per i prestiti ancora aperti.
 INSERT INTO prestiti (libro_id, socio_id, data_prestito, data_restituzione) VALUES 
-    (1, 1, '2026-10-02', '2026-10-10'), -- Prestito chiuso
-    (2, 1, '2026-10-15', NULL),          -- Prestito ancora aperto
-    (3, 2, '2026-10-20', '2026-10-25'), -- Prestito chiuso
-    (1, 3, '2026-11-01', NULL);          -- Prestito ancora aperto
+    (1, 1, '2026-10-02', '2026-10-10'), 
+    (2, 1, '2026-10-15', NULL),       
+    (3, 2, '2026-10-20', '2026-10-25'), 
+    (1, 3, '2026-11-01', NULL);         
 
 /*
 -- Se provi a eseguire questa istruzione:
