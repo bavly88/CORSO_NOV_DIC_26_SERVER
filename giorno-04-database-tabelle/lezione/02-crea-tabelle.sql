@@ -33,7 +33,7 @@ CREATE TABLE libri (
 );
 
 -- libri_autori: tabella ponte (relazione N-N)
-CREATE TABLE libri_autori (
+generiCREATE TABLE libri_autori (
     libro_id   INT UNSIGNED NOT NULL,
     autore_id  INT UNSIGNED NOT NULL,
     PRIMARY KEY (libro_id, autore_id),               -- la coppia non si può ripetere
