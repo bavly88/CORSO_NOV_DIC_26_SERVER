@@ -18,6 +18,7 @@ INSERT INTO autori (nome, cognome) VALUES
 ('Franco', 'Lucentini');
 
 -- genere_id: l'id di un genere che esiste (Romanzo = 1, Giallo = 3)
+<<<<<<< HEAD
 libri
 
 -- Collegare libri e autori: una riga per ogni coppia
@@ -26,6 +27,7 @@ INSERT INTO libri_autori (libro_id, autore_id) VALUES
 (20, 6),   -- Il nome della rosa - Eco
 (21, 7),   -- La donna della domenica - Fruttero
 (21, 8);   -- La donna della domenica - Lucentini
+=======
 
 -- PROVE DI ERRORE (togliere il commento una alla volta ed eseguire con Ctrl+F9):
 -- INSERT INTO generi (nome) VALUES ('Giallo');              -- doppione: UNIQUE lo rifiuta

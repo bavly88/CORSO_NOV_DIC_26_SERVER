@@ -20,6 +20,6 @@ SELECT titolo, anno FROM libri ORDER BY anno DESC;
 SELECT titolo, pagine FROM libri ORDER BY pagine DESC LIMIT 2;
 
 -- Valori mancanti: IS NULL (non "= NULL", che non funziona)
-SELECT titolo FROM libri WHERE pagine IS NULL;
+SELECT * FROM libri WHERE pagine IS NULL;
 
 -- Domani: condizioni più ricche, JOIN tra tabelle, conteggi, modifiche e cancellazioni.

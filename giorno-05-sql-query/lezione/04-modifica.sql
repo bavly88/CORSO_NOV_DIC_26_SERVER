@@ -7,7 +7,7 @@ USE biblioteca;
 -- UPDATE: modificare righe esistenti
 UPDATE libri SET pagine = 250 WHERE id = 16;
 
--- Restituzione di un prestito
+-- Restituzione di un prestito (in questo caso nessun record sarà aggiornato)
 UPDATE prestiti SET data_restituzione = CURRENT_DATE
 WHERE libro_id = 8 AND data_restituzione IS NULL;
 
