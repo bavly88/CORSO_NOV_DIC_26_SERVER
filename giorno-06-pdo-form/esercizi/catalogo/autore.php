@@ -48,6 +48,10 @@ $libri = $stmtLibri->fetchAll();
 $nomeCompleto = trim((string) $autore['nome'] . ' ' . (string) $autore['cognome']);
 $titoloPagina = $nomeCompleto !== '' ? $nomeCompleto : 'Dettaglio autore';
 
+$messaggioConfermaEliminazione = !empty($libri)
+    ? 'Questo autore ha ' . count($libri) . ' ' . (count($libri) === 1 ? 'libro collegato' : 'libri collegati') . '. Eliminare comunque l\'autore?'
+    : 'Eliminare questo autore?';
+
 require_once __DIR__ . '/parti/testata.php';
 ?>
 
@@ -93,6 +97,13 @@ require_once __DIR__ . '/parti/testata.php';
         </ul>
     <?php endif; ?>
 </section>
+
+<div class="zona-elimina">
+    <form method="post" action="elimina-autore.php" onsubmit="return confirm(<?= json_encode($messaggioConfermaEliminazione, JSON_UNESCAPED_UNICODE) ?>)">
+        <input type="hidden" name="id" value="<?= (int) $autore['id'] ?>">
+        <button type="submit">Elimina autore</button>
+    </form>
+</div>
 
 </main>
 <?php require_once __DIR__ . '/parti/piede.php'; ?>

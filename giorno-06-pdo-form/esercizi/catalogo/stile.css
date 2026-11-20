@@ -733,13 +733,15 @@ button:hover {
     border-color: #164896;
 }
 
-/* Pulsante di eliminazione */
-form[action="elimina.php"] button {
+/* Pulsanti di eliminazione */
+form[action="elimina.php"] button,
+form[action="elimina-autore.php"] button {
     background-color: #b00020;
     border-color: #b00020;
 }
 
-form[action="elimina.php"] button:hover {
+form[action="elimina.php"] button:hover,
+form[action="elimina-autore.php"] button:hover {
     background-color: #8c0019;
     border-color: #8c0019;
 }
