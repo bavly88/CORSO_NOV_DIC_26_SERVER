@@ -10,6 +10,8 @@
 <header>
     <a href="index.php"><strong>Bookshelf</strong></a>
     <a href="index.php">Catalogo</a>
+    <a href="autori.php">Autori</a>
     <a href="nuovo.php">Nuovo libro</a>
+    <a href="nuovo-autore.php">Nuovo autore</a>
 </header>
 <main>
