@@ -28,6 +28,7 @@ INSERT INTO libri_autori (libro_id, autore_id) VALUES
 (21, 7),   -- La donna della domenica - Fruttero
 (21, 8);   -- La donna della domenica - Lucentini
 =======
+<<<<<<< HEAD
 INSERT INTO libri (titolo, anno, pagine, genere_id) VALUES
 ('Il barone rampante', 1957, 270, 4),
 ('Il nome della rosa', 1980, 503, 6),
@@ -41,6 +42,8 @@ INSERT INTO libri_autori (libro_id, autore_id) VALUES
 (16, 3),   -- La donna della domenica - Fruttero
 (16, 4);   -- La donna della domenica - Lucentini
 >>>>>>> c3b3677a22594eeb6d5113573133a1b5c7bf82a0
+=======
+>>>>>>> cf40b8b59a9e1ae28ac9e1c2cbba859b8eb8d9ea
 
 -- PROVE DI ERRORE (togliere il commento una alla volta ed eseguire con Ctrl+F9):
 -- INSERT INTO generi (nome) VALUES ('Giallo');              -- doppione: UNIQUE lo rifiuta
