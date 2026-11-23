@@ -67,7 +67,9 @@ require __DIR__ . '/parti/testata.php';
 
 <?php foreach ($libri as $l) { ?>
     <?php if ($l['copertina']) { ?>
+        <span><?= e($l['titolo']) ?></span>
         <img class="copertina" src="uploads/<?= e($l['copertina']) ?>" alt="<?= e($l['titolo']) ?>">
+        <br>
     <?php } ?>
 <?php } ?>
 

@@ -1,4 +1,4 @@
-   <?php
+<?php
     /*
  * 01 - SESSIONI
  * Esecuzione: dalla cartella sito:  php -S localhost:8000
@@ -9,7 +9,9 @@
  * di $_SESSION, che stanno SUL SERVER.
  * F12 > Application (Chrome) > Cookies: il cookie si chiama PHPSESSID.
  */
-    require __DIR__ . '/funzioni.php';
+require __DIR__ . '/funzioni.php';
+   //  var_dump(ini_get('output_buffering'));
+   //  var_dump(headers_sent());
     // un contatore che sopravvive tra una richiesta e l'altra
     $_SESSION['visite'] = ($_SESSION['visite'] ?? 0) + 1;
 
