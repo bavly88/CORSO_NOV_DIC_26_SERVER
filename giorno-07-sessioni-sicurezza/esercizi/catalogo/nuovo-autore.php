@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/db.php';
+richiediLogin();
 
 $annoCorrente = (int) date('Y');
 
@@ -20,6 +21,8 @@ $errori = [
 ];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    csrfVerifica();
+
     $valori['nome'] = trim((string) ($_POST['nome'] ?? ''));
     $valori['cognome'] = trim((string) ($_POST['cognome'] ?? ''));
     $valori['nazionalita'] = trim((string) ($_POST['nazionalita'] ?? ''));
@@ -72,7 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'anno_nascita' => $annoNascitaInt,
         ]);
 
-        $nuovoId = (int) db()->lastInsertId();
+    $nuovoId = (int) db()->lastInsertId();
+        $_SESSION['flash'] = 'Autore salvato.';
         header("Location: autore.php?id={$nuovoId}");
         exit;
     }
@@ -88,6 +92,7 @@ require_once __DIR__ . '/parti/testata.php';
 </div>
 
 <form method="post" action="nuovo-autore.php" class="form-moderno" novalidate>
+    <?= csrfCampo() ?>
     <section class="blocco-moderno">
         <div class="blocco-header">
             <h2>Anagrafica autore</h2>
@@ -188,5 +193,4 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-</main>
 <?php require_once __DIR__ . '/parti/piede.php'; ?>

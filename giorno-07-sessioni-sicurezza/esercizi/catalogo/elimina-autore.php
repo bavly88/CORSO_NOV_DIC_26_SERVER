@@ -1,12 +1,16 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/db.php';
+require __DIR__ . '/db.php';
+richiediLogin();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
     header('Location: autori.php');
     exit;
 }
+
+csrfVerifica();
 
 $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT, [
     'options' => ['min_range' => 1],
@@ -21,11 +25,9 @@ $pdo = db();
 $pdo->beginTransaction();
 
 try {
-    // Rimuove eventuali collegamenti nella tabella ponte libri_autori
     $stmtLink = $pdo->prepare('DELETE FROM libri_autori WHERE autore_id = ?');
     $stmtLink->execute([(int) $id]);
 
-    // Elimina l'autore
     $stmtAutore = $pdo->prepare('DELETE FROM autori WHERE id = ?');
     $stmtAutore->execute([(int) $id]);
 
@@ -37,5 +39,6 @@ try {
     throw $e;
 }
 
+$_SESSION['flash'] = 'Autore eliminato.';
 header('Location: autori.php');
 exit;

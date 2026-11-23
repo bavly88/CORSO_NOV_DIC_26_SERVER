@@ -32,6 +32,11 @@ header a:visited {
     padding: 4px 0;
     transition: color 0.2s ease;
 }
+header span,
+header .utente-nome {
+    color: #ffffff;
+    font-weight: 500;
+}
 
 header a:first-child {
     font-weight: 700;
@@ -76,6 +81,18 @@ main {
     background: #ffffff;
     border: 1px solid #e2e6ec;
     border-radius: 6px;
+}
+
+/* Messaggio flash */
+.flash {
+    margin: 0 0 16px 0;
+    padding: 10px 14px;
+    background-color: #eff6ff;
+    color: #0b2e63;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    font-weight: 600;
 }
 
 /* Intestazione pagina e contatore */
@@ -333,6 +350,27 @@ ul.lista-autori a.autore-nome:focus {
     flex-wrap: wrap;
 }
 
+.azioni-top form.form-inline {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+}
+
+.azioni-top form.form-inline button,
+.azioni-top a.btn-secondario {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    margin: 0;
+    padding: 0 14px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1;
+    border-radius: 6px;
+    transform: none;
+}
+
 a.btn-secondario {
     display: inline-flex;
     align-items: center;
@@ -351,7 +389,58 @@ a.btn-secondario:focus {
     background-color: #e4ecf7;
     border-color: #b7c5d8;
     color: #0b2e63;
-    transform: translateX(-2px);
+    transform: translateY(-1px);
+}
+
+.azioni-top button.btn-secondario {
+    background-color: #f1f5fa;
+    color: #0b2e63;
+    border: 1px solid #cfd8e3;
+}
+
+.azioni-top button.btn-secondario:hover:not(:disabled),
+.azioni-top button.btn-secondario:focus:not(:disabled) {
+    background-color: #e4ecf7;
+    border-color: #b7c5d8;
+    color: #0b2e63;
+}
+
+.azioni-top button.btn-secondario:disabled {
+    opacity: 0.65;
+    cursor: default;
+}
+
+/* Corpo scheda libro: copertina + dati affiancati */
+.scheda-libro-corpo {
+    display: grid;
+    grid-template-columns: 185px minmax(0, 1fr);
+    gap: 22px;
+    align-items: start;
+    margin: 0 0 24px 0;
+}
+
+.scheda-libro-corpo:has(.copertina-libro) .scheda-anagrafica {
+    margin: 0;
+}
+
+.scheda-libro-corpo:not(:has(.copertina-libro)) {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.copertina-libro {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #dce2ea;
+    background-color: #f8faff;
+    box-shadow: 0 6px 16px rgba(11, 46, 99, 0.08);
+}
+
+.copertina-libro img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
 dl.scheda-anagrafica {
@@ -504,6 +593,78 @@ form input:focus,
 form select:focus {
     outline: 2px solid rgba(11, 46, 99, 0.25);
     border-color: #0b2e63;
+}
+
+/* Card moderna per la sezione Copertina in libro.php */
+main > section.blocco-moderno {
+    margin: 20px 0;
+    padding: 18px 20px;
+    background-color: #f8faff;
+    border: 1px solid #dce2ea;
+    border-radius: 10px;
+}
+
+main > section.blocco-moderno h2 {
+    margin: 0 0 12px 0;
+    font-size: 1.1rem;
+    color: #0b2e63;
+}
+
+main > section.blocco-moderno .campo-gruppo {
+    margin-bottom: 12px;
+}
+
+main > section.blocco-moderno label {
+    margin-top: 0;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    color: #334155;
+}
+
+main > section.blocco-moderno input[type="file"] {
+    max-width: 100%;
+    padding: 8px 10px;
+    background-color: #ffffff;
+    border: 1px dashed #94a3b8;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #334155;
+    cursor: pointer;
+}
+
+main > section.blocco-moderno input[type="file"]::file-selector-button {
+    margin-right: 12px;
+    padding: 6px 12px;
+    border: 1px solid #cfd8e3;
+    border-radius: 6px;
+    background-color: #f1f5fa;
+    color: #0b2e63;
+    font-family: inherit;
+    font-size: 0.86rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.16s ease, border-color 0.16s ease;
+}
+
+main > section.blocco-moderno input[type="file"]::file-selector-button:hover {
+    background-color: #e4ecf7;
+    border-color: #b7c5d8;
+}
+
+main > section.blocco-moderno button {
+    margin-top: 4px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+main > section.blocco-moderno > form.form-inline {
+    display: inline-flex;
+    margin-top: 10px;
+    margin-left: 8px;
+}
+
+main > section.blocco-moderno > form.form-inline button {
+    margin-top: 0;
 }
 
 /* Sezioni e impaginazione dei form (nuovo-autore.php / altri form) */
@@ -787,6 +948,14 @@ footer {
     main {
         margin: 10px;
         padding: 14px;
+    }
+
+    .scheda-libro-corpo {
+        grid-template-columns: 1fr;
+    }
+
+    .copertina-libro {
+        max-width: 190px;
     }
 
     dl.scheda-anagrafica {

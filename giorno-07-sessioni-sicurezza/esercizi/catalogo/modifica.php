@@ -1,7 +1,8 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/db.php';
+require __DIR__ . '/db.php';
+richiediLogin();
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT, [
     'options' => ['min_range' => 1],
@@ -60,6 +61,8 @@ $errori = [
 ];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    csrfVerifica();
+
     $valori['titolo'] = trim((string) ($_POST['titolo'] ?? ''));
     $valori['anno'] = trim((string) ($_POST['anno'] ?? ''));
     $valori['pagine'] = trim((string) ($_POST['pagine'] ?? ''));
@@ -122,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
              SET titolo = ?, anno = ?, pagine = ?, genere_id = ?
              WHERE id = ?'
         );
-        $stmtUpdate->execute([
+      $stmtUpdate->execute([
             $valori['titolo'],
             $annoInt,
             $pagineInt,
@@ -130,6 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id,
         ]);
 
+        $_SESSION['flash'] = 'Libro salvato.';
         header("Location: libro.php?id={$id}");
         exit;
     }
@@ -145,6 +149,7 @@ require __DIR__ . '/parti/testata.php';
 </div>
 
 <form method="post" action="modifica.php?id=<?= $id ?>" class="form-moderno" novalidate>
+    <?= csrfCampo() ?>
     <section class="blocco-moderno">
         <div class="blocco-header">
             <h2>Dettagli del libro</h2>

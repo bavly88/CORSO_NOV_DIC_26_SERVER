@@ -1,7 +1,8 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/db.php';
+require __DIR__ . '/db.php'; // o auth.php se richiediLogin() è lì
+richiediLogin();
 
 $autoriDisponibili = db()
     ->query('SELECT id, cognome, nome FROM autori ORDER BY cognome ASC, nome ASC')
@@ -35,6 +36,8 @@ $errori = [
 ];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    csrfVerifica();
+
     $valori['titolo'] = trim((string) ($_POST['titolo'] ?? ''));
     $valori['anno'] = trim((string) ($_POST['anno'] ?? ''));
     $valori['pagine'] = trim((string) ($_POST['pagine'] ?? ''));
@@ -199,7 +202,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
 
-            $pdo->commit();
+      $pdo->commit();
+            $_SESSION['flash'] = 'Libro salvato.';
             header("Location: libro.php?id={$nuovoLibroId}");
             exit;
         } catch (Throwable $e) {
@@ -229,6 +233,7 @@ require __DIR__ . '/parti/testata.php';
 </div>
 
 <form method="post" action="nuovo.php" class="form-moderno" novalidate>
+     <?= csrfCampo() ?>
     <section class="blocco-moderno">
         <div class="blocco-header">
             <h2>Informazioni principali</h2>

@@ -1,13 +1,16 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/db.php';
+require __DIR__ . '/db.php';
+richiediLogin();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     header('Location: index.php');
     exit;
 }
+
+csrfVerifica();
 
 $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT, [
     'options' => ['min_range' => 1],
@@ -24,6 +27,7 @@ try {
     $stmt = db()->prepare('DELETE FROM libri WHERE id = ?');
     $stmt->execute([$id]);
 
+    $_SESSION['flash'] = 'Libro eliminato.';
     header('Location: index.php');
     exit;
 } catch (PDOException $e) {

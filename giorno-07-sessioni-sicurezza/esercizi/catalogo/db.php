@@ -1,8 +1,10 @@
 <?php
-// Funzioni comuni a tutte le pagine del catalogo.
 
-// db(): la connessione, creata una volta sola per richiesta.
-// static: la variabile mantiene il valore tra una chiamata e l'altra.
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 function db(): PDO
 {
     static $pdo = null;
@@ -21,4 +23,48 @@ function db(): PDO
 function e(?string $testo): string
 {
     return htmlspecialchars($testo ?? '', ENT_QUOTES, 'UTF-8');
+}
+
+function redirect(string $percorso): never
+{
+    header('Location: ' . $percorso);
+    exit;
+}
+
+function csrfToken(): string
+{
+    if (empty($_SESSION['csrf_token']) || !is_string($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+
+function csrfCampo(): string
+{
+    $token = e(csrfToken());
+    return '<input type="hidden" name="csrf_token" value="' . $token . '">';
+}
+
+function csrfVerifica(): void
+{
+    $tokenSessione = $_SESSION['csrf_token'] ?? '';
+    $tokenPost = $_POST['csrf_token'] ?? '';
+
+    if (
+        !is_string($tokenSessione) ||
+        !is_string($tokenPost) ||
+        $tokenSessione === '' ||
+        !hash_equals($tokenSessione, $tokenPost)
+    ) {
+        http_response_code(403);
+        exit('Token CSRF non valido.');
+    }
+}
+
+function richiediLogin(): void
+{
+    $utente = $_SESSION['utente'] ?? null;
+    if (!is_array($utente) || empty($utente['id'])) {
+        redirect('login.php');
+    }
 }
