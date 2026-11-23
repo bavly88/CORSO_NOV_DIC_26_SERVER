@@ -1,0 +1,824 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #222;
+    background-color: #f4f6f9;
+    line-height: 1.5;
+}
+
+/* Testata e navigazione */
+header {
+    background: #0b2e63;
+    padding: 13px 22px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 20px;
+}
+
+header a,
+header a:visited {
+    position: relative;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 4px 0;
+    transition: color 0.2s ease;
+}
+
+header a:first-child {
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+header a:nth-child(2) {
+    margin-left: auto;
+}
+
+header a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background-color: #93c5fd;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.22s ease;
+}
+
+header a:hover,
+header a:focus {
+    color: #dbeafe;
+    text-decoration: none;
+    outline: none;
+}
+
+header a:hover::after,
+header a:focus::after {
+    transform: scaleX(1);
+}
+
+/* Contenitore principale */
+main {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 22px 24px;
+    background: #ffffff;
+    border: 1px solid #e2e6ec;
+    border-radius: 6px;
+}
+
+/* Intestazione pagina e contatore */
+.intestazione-pagina {
+    margin-bottom: 16px;
+}
+
+.intestazione-pagina h1 {
+    margin: 0 0 2px 0;
+    font-size: 1.7rem;
+    color: #0b2e63;
+    letter-spacing: -0.01em;
+}
+
+.conteggio-libri {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #5a6577;
+    font-weight: 500;
+}
+
+h1, h2 {
+    margin-top: 0;
+    color: #0b2e63;
+}
+
+h2 {
+    margin-top: 24px;
+    font-size: 1.2rem;
+}
+
+/* Link generali: effetto moderno senza linea classica */
+a {
+    color: #0b2e63;
+    text-decoration: none;
+    transition: color 0.18s ease, transform 0.18s ease;
+}
+
+a:hover,
+a:focus {
+    color: #1d5bbf;
+    text-decoration: none;
+    outline: none;
+}
+
+/* Link dei libri nella tabella */
+td a {
+    display: inline-block;
+    font-weight: 500;
+}
+
+td a:hover,
+td a:focus {
+    color: #1d5bbf;
+    transform: translateX(3px);
+}
+
+/* Tabelle chiuse ai lati */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 14px;
+    border: 1px solid #dce2ea;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid #e5e9f0;
+}
+
+th + th,
+td + td {
+    border-left: 1px solid #edf0f5;
+}
+
+th {
+    background-color: #f1f5fa;
+    font-weight: bold;
+    color: #0b2e63;
+    border-bottom: 1px solid #cfd8e3;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background-color: #f8faff;
+}
+
+/* Intestazione pagina autori con azione a destra */
+.intestazione-autori {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+}
+
+.intestazione-autori h1 {
+    margin: 0;
+    font-size: 1.7rem;
+    color: #0b2e63;
+    letter-spacing: -0.01em;
+}
+
+a.btn-nuovo-autore {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    background-color: #0b2e63;
+    color: #ffffff;
+    border-radius: 6px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    transition: background-color 0.18s ease, transform 0.18s ease;
+}
+
+a.btn-nuovo-autore:hover,
+a.btn-nuovo-autore:focus {
+    background-color: #164896;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+/* Elenchi (autori e libri collegati) */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0;
+    border: 1px solid #dce2ea;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+li {
+    padding: 10px 14px;
+    border-bottom: 1px solid #e5e9f0;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+/* Lista autori moderna */
+ul.lista-autori {
+    margin: 12px 0 0;
+}
+
+ul.lista-autori li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 11px 14px;
+    transition: background-color 0.16s ease;
+}
+
+ul.lista-autori li:hover {
+    background-color: #f8faff;
+}
+
+ul.lista-autori a.autore-nome {
+    display: inline-block;
+    font-weight: 500;
+    color: #0b2e63;
+}
+
+ul.lista-autori a.autore-nome:hover,
+ul.lista-autori a.autore-nome:focus {
+    color: #1d5bbf;
+    transform: translateX(3px);
+}
+
+.autore-conteggio {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #4b5563;
+    background-color: #f1f5fa;
+    border: 1px solid #dce2ea;
+    padding: 3px 9px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+/* Scheda dettagli (autore.php / libro.php) */
+.scheda-autore-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+}
+
+.scheda-autore-top h1 {
+    margin: 0;
+    font-size: 1.7rem;
+    color: #0b2e63;
+    letter-spacing: -0.01em;
+}
+
+/* Intestazione unita titolo + autore (libro.php) */
+.scheda-libro-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e5e9f0;
+}
+
+.scheda-libro-titolo-wrap h1 {
+    margin: 0;
+    font-size: 1.75rem;
+    color: #0b2e63;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+}
+
+.scheda-libro-autori {
+    margin: 6px 0 0;
+    font-size: 1rem;
+    color: #5a6577;
+}
+
+.scheda-libro-autori span {
+    font-style: italic;
+    margin-right: 4px;
+}
+
+.scheda-libro-autori a {
+    font-weight: 600;
+    color: #0b2e63;
+}
+
+.scheda-libro-autori a:hover,
+.scheda-libro-autori a:focus {
+    color: #1d5bbf;
+}
+
+.azioni-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+a.btn-secondario {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 13px;
+    background-color: #f1f5fa;
+    color: #0b2e63;
+    border: 1px solid #cfd8e3;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+a.btn-secondario:hover,
+a.btn-secondario:focus {
+    background-color: #e4ecf7;
+    border-color: #b7c5d8;
+    color: #0b2e63;
+    transform: translateX(-2px);
+}
+
+dl.scheda-anagrafica {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: 0;
+    margin: 0 0 24px;
+    padding: 0;
+    background-color: #ffffff;
+    border: 1px solid #dce2ea;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+dl.scheda-anagrafica dt,
+dl.scheda-anagrafica dd {
+    padding: 11px 14px;
+    margin: 0;
+    border-bottom: 1px solid #e5e9f0;
+    display: flex;
+    align-items: center;
+}
+
+dl.scheda-anagrafica dt {
+    background-color: #f8faff;
+    font-weight: 700;
+    color: #0b2e63;
+    border-right: 1px solid #edf0f5;
+}
+
+dl.scheda-anagrafica dd {
+    color: #222;
+    background-color: #ffffff;
+}
+
+dl.scheda-anagrafica dt:last-of-type,
+dl.scheda-anagrafica dd:last-of-type {
+    border-bottom: none;
+}
+
+.zona-elimina {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #e5e9f0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.zona-elimina button {
+    margin-top: 0;
+}
+
+.sezione-libri-autore h2 {
+    margin: 0 0 12px;
+    font-size: 1.2rem;
+    color: #0b2e63;
+}
+
+.vuoto-box {
+    margin: 0;
+    padding: 14px 16px;
+    background-color: #f8f9fb;
+    border: 1px dashed #cbd5e1;
+    border-radius: 6px;
+    color: #5a6577;
+    font-size: 0.95rem;
+}
+
+ul.lista-libri-autore {
+    margin: 0;
+}
+
+ul.lista-libri-autore li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 11px 14px;
+    transition: background-color 0.16s ease;
+}
+
+ul.lista-libri-autore li:hover {
+    background-color: #f8faff;
+}
+
+ul.lista-libri-autore a.libro-link {
+    display: inline-block;
+    font-weight: 500;
+    color: #0b2e63;
+}
+
+ul.lista-libri-autore a.libro-link:hover,
+ul.lista-libri-autore a.libro-link:focus {
+    color: #1d5bbf;
+    transform: translateX(3px);
+}
+
+.libro-anno {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #4b5563;
+    background-color: #f1f5fa;
+    border: 1px solid #dce2ea;
+    padding: 2px 9px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+/* Fallback dl generico */
+dl {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 6px 12px;
+    margin: 12px 0 20px;
+    padding: 12px;
+    background-color: #f8f9fb;
+    border: 1px solid #e2e6ec;
+    border-radius: 4px;
+}
+
+dt {
+    font-weight: bold;
+    color: #444;
+}
+
+dd {
+    margin: 0;
+}
+
+/* Form e controlli */
+form label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+form input,
+form select {
+    padding: 7px 9px;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+form input:focus,
+form select:focus {
+    outline: 2px solid rgba(11, 46, 99, 0.25);
+    border-color: #0b2e63;
+}
+
+/* Sezioni e impaginazione dei form (nuovo-autore.php / altri form) */
+.form-sezione {
+    margin-top: 20px;
+    padding: 16px 18px;
+    background-color: #f8faff;
+    border: 1px solid #dce2ea;
+    border-radius: 6px;
+}
+
+.form-sezione h2,
+.form-sezione legend {
+    margin: 0 0 8px;
+    padding: 0;
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: #0b2e63;
+}
+
+.form-sezione label:first-child,
+.form-sezione legend + label {
+    margin-top: 4px;
+}
+
+form select[multiple] {
+    min-height: 135px;
+    padding: 6px;
+    background-color: #ffffff;
+}
+
+form select[multiple] option {
+    padding: 5px 8px;
+    border-radius: 4px;
+}
+
+.form-aiuto {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.85rem;
+    color: #5a6577;
+}
+
+.form-azioni {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px solid #e5e9f0;
+}
+
+.form-azioni button {
+    margin-top: 0;
+}
+
+/* Form moderno e interattivo (nuovo.php) */
+.form-moderno .blocco-moderno {
+    margin-top: 18px;
+    padding: 18px 20px;
+    background-color: #ffffff;
+    border: 1px solid #dce2ea;
+    border-radius: 8px;
+}
+
+.blocco-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #edf1f6;
+}
+
+.blocco-header h2 {
+    margin: 0;
+    font-size: 1.12rem;
+    color: #0b2e63;
+}
+
+.blocco-header span {
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.form-moderno .campo-gruppo {
+    margin-bottom: 12px;
+}
+
+.form-moderno .campo-gruppo:last-child {
+    margin-bottom: 0;
+}
+
+.form-moderno label {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: #334155;
+}
+
+.form-moderno input,
+.form-moderno select {
+    max-width: 100%;
+    padding: 9px 11px;
+    border-color: #cbd5e1;
+    border-radius: 6px;
+}
+
+.griglia-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 16px;
+}
+
+/* Chip interattive per gli autori */
+.chip-autori {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.chip-autore {
+    display: inline-flex !important;
+    align-items: center;
+    margin: 0 !important;
+    padding: 7px 12px !important;
+    background-color: #f1f5fa;
+    color: #0b2e63 !important;
+    border: 1px solid #cfd8e3;
+    border-radius: 999px;
+    font-size: 0.88rem;
+    font-weight: 500 !important;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease, transform 0.14s ease;
+}
+
+.chip-autore:hover {
+    background-color: #e4ecf7;
+    border-color: #93c5fd;
+    transform: translateY(-1px);
+}
+
+.chip-autore input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: auto;
+}
+
+.chip-autore.is-selected {
+    background-color: #0b2e63;
+    border-color: #0b2e63;
+    color: #ffffff !important;
+}
+
+/* Toggle e pannello a scomparsa nuovo autore */
+.toggle-nuovo-autore-wrap {
+    margin-top: 14px;
+}
+
+button.btn-toggle-autore {
+    margin-top: 0;
+    padding: 7px 12px;
+    background-color: transparent;
+    color: #0b2e63;
+    border: 1px dashed #94a3b8;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+button.btn-toggle-autore:hover {
+    background-color: #f8faff;
+    border-color: #0b2e63;
+    color: #0b2e63;
+}
+
+.pannello-nuovo-autore {
+    display: none;
+    margin-top: 14px;
+    padding: 14px 16px;
+    background-color: #f8faff;
+    border: 1px solid #dce2ea;
+    border-radius: 6px;
+}
+
+.pannello-nuovo-autore.is-open {
+    display: block;
+}
+
+/* Form di ricerca (GET) allineato su una riga */
+form[method="get"] {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+form[method="get"] input {
+    max-width: 320px;
+}
+
+form[method="get"] button {
+    margin-top: 0;
+}
+
+button {
+    margin-top: 16px;
+    padding: 8px 16px;
+    background-color: #0b2e63;
+    color: #ffffff;
+    border: 1px solid #0b2e63;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+
+button:hover {
+    background-color: #164896;
+    border-color: #164896;
+}
+
+/* Pulsanti di eliminazione */
+form[action="elimina.php"] button,
+form[action="elimina-autore.php"] button {
+    background-color: #b00020;
+    border-color: #b00020;
+}
+
+form[action="elimina.php"] button:hover,
+form[action="elimina-autore.php"] button:hover {
+    background-color: #8c0019;
+    border-color: #8c0019;
+}
+
+.errore {
+    display: inline-block;
+    margin-top: 4px;
+    color: #b00020;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* Piè di pagina */
+footer {
+    margin-top: auto;
+    background-color: #7e8da0;
+    padding: 18px 22px;
+    color: #ffffff;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.footer-interno {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px 14px;
+}
+
+.footer-brand {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.footer-meta {
+    color: #eef2f7;
+}
+
+@media (max-width: 600px) {
+    main {
+        margin: 10px;
+        padding: 14px;
+    }
+
+    dl.scheda-anagrafica {
+        grid-template-columns: 1fr;
+    }
+
+    dl.scheda-anagrafica dt {
+        border-right: none;
+        border-bottom: none;
+        padding-bottom: 4px;
+    }
+
+    dl.scheda-anagrafica dd {
+        padding-top: 2px;
+        padding-bottom: 10px;
+    }
+
+    dl {
+        grid-template-columns: 1fr;
+    }
+
+    .griglia-2 {
+        grid-template-columns: 1fr;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .footer-interno {
+        flex-direction: column;
+        text-align: center;
+    }
+}

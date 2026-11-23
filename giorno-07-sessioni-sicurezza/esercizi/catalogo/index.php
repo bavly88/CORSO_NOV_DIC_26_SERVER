@@ -27,7 +27,12 @@ $titoloPagina = 'Catalogo';
 require __DIR__ . '/parti/testata.php';
 ?>
 
-<h1>Catalogo (<?= count($libri) ?> libri)</h1>
+<?php $numeroLibri = count($libri); ?>
+<div class="intestazione-pagina">
+    <h1>Raccolta libri</h1>
+    <p class="conteggio-libri"><?= $numeroLibri ?> <?= $numeroLibri === 1 ? 'libro' : 'libri' ?></p>
+</div>
+
 
 <form method="get">
     <input type="search" name="q" value="<?= e($q) ?>" placeholder="Titolo">
