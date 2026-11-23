@@ -1,0 +1,12 @@
+body { font-family: Arial, sans-serif; margin: 0; color: #222; }
+header { display: flex; gap: 16px; align-items: center; background: #0b2e63; color: white; padding: 12px 20px; }
+header a { color: white; text-decoration: none; }
+main { max-width: 800px; margin: 0 auto; padding: 16px; }
+label { display: block; margin-top: 12px; }
+input, textarea { padding: 6px; width: 100%; max-width: 400px; }
+button { margin-top: 12px; padding: 6px 14px; }
+.in-linea { display: inline; }
+.in-linea button { margin: 0; }
+.errore { color: #b00020; }
+.attenzione { background: #fbe3e6; padding: 8px 12px; }
+img.copertina { width: 150px; margin: 8px; }

@@ -14,7 +14,10 @@ $errori = [];
 // $dati contiene i valori inseriti: servono per ripopolare il form dopo un errore
 $dati = ['titolo' => '', 'anno' => '', 'pagine' => '', 'genere_id' => ''];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// var_dump($_SERVER['REQUEST_METHOD']);
+// var_dump($_POST);
+// if ($_SERVER['REQUEST_METHOD'] === 'POST') { verifica che sia stata fatta la submit del form
+    if (count ($_POST) >0) {
     // $_POST contiene i campi del form, per name
     $dati['titolo'] = trim($_POST['titolo'] ?? '');
     $dati['anno'] = trim($_POST['anno'] ?? '');
@@ -44,10 +47,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (count($errori) === 0) {
-        $stmt = db()->prepare(
+    //     $stmt = db()->prepare(
+    //         "INSERT INTO libri (titolo, anno, pagine, genere_id) VALUES (?, ?, ?, ?)"
+    //     );
+    //     $stmt->execute([
+    //         $dati['titolo'],
+    //         $dati['anno'] === '' ? null : (int) $dati['anno'],     // campo vuoto -> NULL
+    //         $dati['pagine'] === '' ? null : (int) $dati['pagine'],
+    //         (int) $dati['genere_id'],
+    //     ]);
+
+
+    //volendo posso anche omettere la variabile stmt che è solo di appoggio 
+        db()->prepare(
             "INSERT INTO libri (titolo, anno, pagine, genere_id) VALUES (?, ?, ?, ?)"
-        );
-        $stmt->execute([
+        )->execute([
             $dati['titolo'],
             $dati['anno'] === '' ? null : (int) $dati['anno'],     // campo vuoto -> NULL
             $dati['pagine'] === '' ? null : (int) $dati['pagine'],

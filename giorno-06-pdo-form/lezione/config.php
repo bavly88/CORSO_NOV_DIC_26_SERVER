@@ -6,5 +6,9 @@ return [
     'port'     => 3306,
     'database' => 'biblioteca',
     'username' => 'root',
+<<<<<<< HEAD
     'password' => '200219*',
+=======
+    'password' => '1234',
+>>>>>>> fe5e7dd10dbe96dc5676fa4171b47fc0645745f0
 ];

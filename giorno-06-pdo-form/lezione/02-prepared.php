@@ -28,7 +28,8 @@ print_r($libro);
 // Segnaposto con nome: più leggibili quando sono tanti
 $stmt = $pdo->prepare("SELECT titolo, anno FROM libri WHERE anno BETWEEN :da AND :a ORDER BY anno");
 $stmt->execute(['da' => 1960, 'a' => 1970]);
-foreach ($stmt->fetchAll() as $l) {
+$results = $stmt->fetchAll();
+foreach ($results as $l) {
     echo "{$l['anno']} {$l['titolo']}\n";
 }
 
@@ -37,6 +38,11 @@ $cerca = "rosa";
 $stmt = $pdo->prepare("SELECT titolo FROM libri WHERE titolo LIKE ?");
 $stmt->execute(['%' . $cerca . '%']);
 print_r($stmt->fetchAll());
+
+//POTEVAMO ANCHE SCRIVERE :cerca invece del ?
+// $stmt = $pdo->prepare("SELECT titolo FROM libri WHERE titolo LIKE :cerca");
+// $stmt->execute( ['cerca' => '%' . $cerca . '%']);
+// print_r($stmt->fetchAll());
 
 // INSERT: lastInsertId() restituisce l'id assegnato dal database
 $stmt = $pdo->prepare("INSERT INTO generi (nome) VALUES (?)");

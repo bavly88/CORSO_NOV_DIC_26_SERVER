@@ -5,16 +5,15 @@
  * È il catalogo del giorno 2: al posto dell'array di libri.php c'è il database.
  */
 require __DIR__ . '/db.php';
-
 $q = trim($_GET['q'] ?? '');
-
+// var_dump($_GET);
 $sql = "SELECT l.id, l.titolo, l.anno, g.nome AS genere
         FROM libri l
         LEFT JOIN generi g ON g.id = l.genere_id";
 $valori = [];
 
 if ($q !== '') {
-    $sql .= " WHERE l.titolo LIKE ?";
+    $sql .= " WHERE l.titolo LIKE ? ";
     $valori[] = '%' . $q . '%';
 }
 $sql .= " ORDER BY l.titolo";
