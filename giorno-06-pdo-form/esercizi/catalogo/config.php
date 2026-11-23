@@ -7,5 +7,4 @@ return [
     'database' => 'biblioteca',
     'username' => 'root',
     'password' => '200219*',
-
 ];

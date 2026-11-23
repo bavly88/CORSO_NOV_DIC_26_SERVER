@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 declare(strict_types=1);
 
 require_once __DIR__ . '/db.php';
@@ -161,4 +160,3 @@ require __DIR__ . '/parti/testata.php';
 <p><a href="autori.php">Torna agli autori</a></p>
 
 <?php require __DIR__ . '/parti/piede.php'; ?>
->>>>>>> fe5e7dd10dbe96dc5676fa4171b47fc0645745f0

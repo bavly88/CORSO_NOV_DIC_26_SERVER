@@ -12,10 +12,9 @@
     <a href="index.php">Catalogo</a>
     <a href="autori.php">Autori</a>
     <a href="nuovo.php">Nuovo libro</a>
-<<<<<<< HEAD
+
     <a href="nuovo-autore.php">Nuovo autore</a>
-=======
     <a href="autori.php">Autori</a>
->>>>>>> fe5e7dd10dbe96dc5676fa4171b47fc0645745f0
+
 </header>
 <main>
