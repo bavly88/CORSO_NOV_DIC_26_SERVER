@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 declare(strict_types=1);
 
@@ -79,5 +78,3 @@ require __DIR__ . '/parti/testata.php';
 
 
 
-
->>>>>>> fe5e7dd10dbe96dc5676fa4171b47fc0645745f0
