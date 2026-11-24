@@ -33,6 +33,8 @@ $stmt = db()->prepare(
      WHERE p.utente_id = ?
      ORDER BY l.titolo ASC'
 );
+
+
 $stmt->execute([$utenteId]);
 $titoliPreferiti = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
